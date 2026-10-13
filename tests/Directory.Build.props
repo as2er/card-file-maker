@@ -1,0 +1,1 @@
+<Project><PropertyGroup><BaseIntermediateOutputPath>../build/obj/Tests/</BaseIntermediateOutputPath><BaseOutputPath>../build/tests/</BaseOutputPath><NuGetAudit>false</NuGetAudit></PropertyGroup></Project>

@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='utf-8'?>
+<CardData>
+  <dataName>card000001</dataName>
+  <Name>
+    <id>1</id>
+    <str>示例卡片</str>
+  </Name>
+  <CharaID>
+    <id>1</id>
+    <str>示例角色</str>
+  </CharaID>
+  <NickName />
+  <SortOrder>1</SortOrder>
+  <Attribute>Fire</Attribute>
+  <School>
+    <id>0</id>
+    <str>-</str>
+  </School>
+  <NameForCommonModel />
+  <IsCommonModel>false</IsCommonModel>
+  <IsDigital>false</IsDigital>
+  <IsTicketUsable>false</IsTicketUsable>
+  <IsSpecialPrint>false</IsSpecialPrint>
+  <CardEffect>
+    <IsEffect>false</IsEffect>
+    <EffectID>0</EffectID>
+  </CardEffect>
+  <Gakunen>
+    <id>0</id>
+    <str>-</str>
+  </Gakunen>
+  <PersonalityIDs />
+  <Rarity>R</Rarity>
+  <LevelParam>
+    <int>50</int>
+    <int>197</int>
+    <int>212</int>
+    <int>227</int>
+    <int>242</int>
+    <int>257</int>
+    <int>0</int>
+    <int>0</int>
+    <int>0</int>
+    <int>257</int>
+  </LevelParam>
+  <SkillID>
+    <id>100005</id>
+    <str>ボスアタック +10</str>
+  </SkillID>
+  <ChoKaikaSkillID>
+    <id>100046</id>
+    <str>ボスアタック +12</str>
+  </ChoKaikaSkillID>
+  <CardRightsName>
+    <id>0</id>
+    <str>-</str>
+  </CardRightsName>
+  <VersionID>
+    <id>1060</id>
+    <str>ver_1_60</str>
+  </VersionID>
+  <CardNumberString>Custom Boss</CardNumberString>
+  <LicenseID>
+    <id>0</id>
+    <str>-</str>
+  </LicenseID>
+  <IsLockedAtTheBeginning>false</IsLockedAtTheBeginning>
+  <PrintEndDateTime>0001-01-01T00:00:00</PrintEndDateTime>
+</CardData>

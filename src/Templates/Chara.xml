@@ -1,0 +1,205 @@
+<?xml version='1.0' encoding='utf-8'?>
+<CharaData>
+  <dataName>chara000001</dataName>
+  <Name>
+    <id>1</id>
+    <str>示例角色</str>
+  </Name>
+  <FirstContactRewardCardData>
+    <id>0</id>
+    <str>-</str>
+  </FirstContactRewardCardData>
+  <Model>
+    <id>1</id>
+    <str>示例角色</str>
+  </Model>
+  <GraphicCardData>
+    <id>1</id>
+    <str>示例卡片</str>
+  </GraphicCardData>
+  <IsModelless>true</IsModelless>
+  <FlavorText />
+  <FlavorText2 />
+  <FlavorText3 />
+  <FlavorText4 />
+  <FlavorText5 />
+  <FlavorText6 />
+  <Birthday>0001-01-01T00:00:00</Birthday>
+  <BloodType>O</BloodType>
+  <PersonalityType>None</PersonalityType>
+  <Height>0</Height>
+  <Profile>
+    <ProfileString>
+      <Profile />
+    </ProfileString>
+    <ProfileString>
+      <Profile />
+    </ProfileString>
+    <ProfileString>
+      <Profile />
+    </ProfileString>
+    <ProfileString>
+      <Profile />
+    </ProfileString>
+    <ProfileString>
+      <Profile />
+    </ProfileString>
+    <ProfileString>
+      <Profile />
+    </ProfileString>
+    <ProfileString>
+      <Profile />
+    </ProfileString>
+    <ProfileString>
+      <Profile />
+    </ProfileString>
+    <ProfileString>
+      <Profile />
+    </ProfileString>
+    <ProfileString>
+      <Profile />
+    </ProfileString>
+  </Profile>
+  <ProfileVoice>
+    <ProfileVoiceNameStringID>
+      <StringID>
+        <id>-1</id>
+        <str>Invalid</str>
+      </StringID>
+    </ProfileVoiceNameStringID>
+    <ProfileVoiceNameStringID>
+      <StringID>
+        <id>-1</id>
+        <str>Invalid</str>
+      </StringID>
+    </ProfileVoiceNameStringID>
+    <ProfileVoiceNameStringID>
+      <StringID>
+        <id>-1</id>
+        <str>Invalid</str>
+      </StringID>
+    </ProfileVoiceNameStringID>
+    <ProfileVoiceNameStringID>
+      <StringID>
+        <id>-1</id>
+        <str>Invalid</str>
+      </StringID>
+    </ProfileVoiceNameStringID>
+    <ProfileVoiceNameStringID>
+      <StringID>
+        <id>-1</id>
+        <str>Invalid</str>
+      </StringID>
+    </ProfileVoiceNameStringID>
+    <ProfileVoiceNameStringID>
+      <StringID>
+        <id>-1</id>
+        <str>Invalid</str>
+      </StringID>
+    </ProfileVoiceNameStringID>
+    <ProfileVoiceNameStringID>
+      <StringID>
+        <id>-1</id>
+        <str>Invalid</str>
+      </StringID>
+    </ProfileVoiceNameStringID>
+    <ProfileVoiceNameStringID>
+      <StringID>
+        <id>-1</id>
+        <str>Invalid</str>
+      </StringID>
+    </ProfileVoiceNameStringID>
+    <ProfileVoiceNameStringID>
+      <StringID>
+        <id>-1</id>
+        <str>Invalid</str>
+      </StringID>
+    </ProfileVoiceNameStringID>
+    <ProfileVoiceNameStringID>
+      <StringID>
+        <id>-1</id>
+        <str>Invalid</str>
+      </StringID>
+    </ProfileVoiceNameStringID>
+  </ProfileVoice>
+  <Trophy>
+    <TrophyNameStringID>
+      <StringID>
+        <id>-1</id>
+        <str>Invalid</str>
+      </StringID>
+    </TrophyNameStringID>
+    <TrophyNameStringID>
+      <StringID>
+        <id>-1</id>
+        <str>Invalid</str>
+      </StringID>
+    </TrophyNameStringID>
+    <TrophyNameStringID>
+      <StringID>
+        <id>-1</id>
+        <str>Invalid</str>
+      </StringID>
+    </TrophyNameStringID>
+    <TrophyNameStringID>
+      <StringID>
+        <id>-1</id>
+        <str>Invalid</str>
+      </StringID>
+    </TrophyNameStringID>
+    <TrophyNameStringID>
+      <StringID>
+        <id>-1</id>
+        <str>Invalid</str>
+      </StringID>
+    </TrophyNameStringID>
+    <TrophyNameStringID>
+      <StringID>
+        <id>-1</id>
+        <str>Invalid</str>
+      </StringID>
+    </TrophyNameStringID>
+    <TrophyNameStringID>
+      <StringID>
+        <id>-1</id>
+        <str>Invalid</str>
+      </StringID>
+    </TrophyNameStringID>
+    <TrophyNameStringID>
+      <StringID>
+        <id>-1</id>
+        <str>Invalid</str>
+      </StringID>
+    </TrophyNameStringID>
+    <TrophyNameStringID>
+      <StringID>
+        <id>-1</id>
+        <str>Invalid</str>
+      </StringID>
+    </TrophyNameStringID>
+  </Trophy>
+  <NamePlate>
+    <NamePlateNameStringID>
+      <StringID>
+        <id>-1</id>
+        <str>Invalid</str>
+      </StringID>
+    </NamePlateNameStringID>
+    <NamePlateNameStringID>
+      <StringID>
+        <id>-1</id>
+        <str>Invalid</str>
+      </StringID>
+    </NamePlateNameStringID>
+  </NamePlate>
+  <Attachment>
+    <AttachmentNameStringID>
+      <StringID>
+        <id>-1</id>
+        <str>Invalid</str>
+      </StringID>
+    </AttachmentNameStringID>
+  </Attachment>
+  <SortOrder>1</SortOrder>
+  <IsCommunicationTarget>false</IsCommunicationTarget>
+</CharaData>

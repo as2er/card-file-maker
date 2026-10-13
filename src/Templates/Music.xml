@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MusicData>
+  <dataName />
+  <Name>
+    <id />
+    <str />
+  </Name>
+  <ArtistName>
+    <id />
+    <str />
+  </ArtistName>
+  <MusicRightsName>
+    <id>0</id>
+    <str>-</str>
+  </MusicRightsName>
+  <MusicSourceName>
+    <id />
+    <str />
+  </MusicSourceName>
+  <Genre>
+    <id />
+    <str />
+  </Genre>
+  <FirstChapterName>
+    <id />
+    <str />
+  </FirstChapterName>
+  <FumenData>
+    <FumenData>
+      <FumenConstIntegerPart>0</FumenConstIntegerPart>
+      <FumenConstFractionalPart>0</FumenConstFractionalPart>
+      <FumenFile>
+        <path />
+      </FumenFile>
+    </FumenData>
+    <FumenData>
+      <FumenConstIntegerPart>0</FumenConstIntegerPart>
+      <FumenConstFractionalPart>0</FumenConstFractionalPart>
+      <FumenFile>
+        <path />
+      </FumenFile>
+    </FumenData>
+    <FumenData>
+      <FumenConstIntegerPart>0</FumenConstIntegerPart>
+      <FumenConstFractionalPart>0</FumenConstFractionalPart>
+      <FumenFile>
+        <path />
+      </FumenFile>
+    </FumenData>
+    <FumenData>
+      <FumenConstIntegerPart>0</FumenConstIntegerPart>
+      <FumenConstFractionalPart>0</FumenConstFractionalPart>
+      <FumenFile>
+        <path />
+      </FumenFile>
+    </FumenData>
+    <FumenData>
+      <FumenConstIntegerPart>0</FumenConstIntegerPart>
+      <FumenConstFractionalPart>0</FumenConstFractionalPart>
+      <FumenFile>
+        <path />
+      </FumenFile>
+    </FumenData>
+  </FumenData>
+  <IsLunatic>false</IsLunatic>
+  <IsReMaster>false</IsReMaster>
+  <BossCard>
+    <id />
+    <str />
+  </BossCard>
+  <BossLevel>1</BossLevel>
+  <WaveAttribute>
+    <AttributeType />
+  </WaveAttribute>
+  <CostToUnlock>0</CostToUnlock>
+  <FinishBonus>2</FinishBonus>
+  <EpReleaseFlag>false</EpReleaseFlag>
+  <VersionID>
+    <id>1045</id>
+    <str>ver_1_45</str>
+  </VersionID>
+  <SortOrder>0</SortOrder>
+  <StageID>
+    <id />
+    <str />
+  </StageID>
+  <PossessingFromTheBeginning>true</PossessingFromTheBeginning>
+  <IsLockedAtTheBeginning>false</IsLockedAtTheBeginning>
+  <ReleaseVersion>2021-03-31T00:00:00</ReleaseVersion>
+  <NameForSort />
+  <BossLockHpCoef>0</BossLockHpCoef>
+  <BossLockRewards />
+  <BossVoiceNo>0</BossVoiceNo>
+  <IsBonusTrack>false</IsBonusTrack>
+</MusicData>

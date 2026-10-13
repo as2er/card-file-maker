@@ -1,0 +1,30 @@
+# 本地构建、发布包及 IDE 缓存
+/build/
+/dist/
+/releases/
+**/bin/
+**/obj/
+.vs/
+*.user
+*.suo
+*.pdb
+*.zip
+
+# 用户项目、自动保存、备份与本地配置
+**/save/
+**/card-maker-backups/
+**/music-backups/
+*.cfmproj
+*.pending*
+*.backup
+*.bak
+*.log
+.env
+.env.*
+
+# 私有素材及替代模板；通用占位模板保留在 src/Templates
+/private-templates/
+/local-assets/
+
+# 本地游戏舞台预览资源；仅嵌入运行包。
+src/Assets/StagePreviews.dat

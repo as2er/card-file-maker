@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <CfmTemplateDirectory Condition="'$(CfmTemplateDirectory)' == ''">$(MSBuildProjectDirectory)/Templates</CfmTemplateDirectory>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Core/**/*.cs" />
+    <EmbeddedResource Include="$(CfmTemplateDirectory)/Card.xml" Condition="Exists('$(CfmTemplateDirectory)/Card.xml')">
+      <LogicalName>CardFileMaker.Templates.Card.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(CfmTemplateDirectory)/Chara.xml" Condition="Exists('$(CfmTemplateDirectory)/Chara.xml')">
+      <LogicalName>CardFileMaker.Templates.Chara.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(CfmTemplateDirectory)/Music.xml" Condition="Exists('$(CfmTemplateDirectory)/Music.xml')">
+      <LogicalName>CardFileMaker.Templates.Music.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(CfmTemplateDirectory)/DataConfig.xml" Condition="Exists('$(CfmTemplateDirectory)/DataConfig.xml')">
+      <LogicalName>CardFileMaker.Templates.DataConfig.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(CfmTemplateDirectory)/card.bin" Condition="Exists('$(CfmTemplateDirectory)/card.bin')">
+      <LogicalName>CardFileMaker.Templates.card.bin</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(CfmTemplateDirectory)/cardSmall.bin" Condition="Exists('$(CfmTemplateDirectory)/cardSmall.bin')">
+      <LogicalName>CardFileMaker.Templates.cardSmall.bin</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(CfmTemplateDirectory)/icon.bin" Condition="Exists('$(CfmTemplateDirectory)/icon.bin')">
+      <LogicalName>CardFileMaker.Templates.icon.bin</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(CfmTemplateDirectory)/iconSmall.bin" Condition="Exists('$(CfmTemplateDirectory)/iconSmall.bin')">
+      <LogicalName>CardFileMaker.Templates.iconSmall.bin</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(CfmTemplateDirectory)/battle.bin" Condition="Exists('$(CfmTemplateDirectory)/battle.bin')">
+      <LogicalName>CardFileMaker.Templates.battle.bin</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(CfmTemplateDirectory)/portrait.bin" Condition="Exists('$(CfmTemplateDirectory)/portrait.bin')">
+      <LogicalName>CardFileMaker.Templates.portrait.bin</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>
