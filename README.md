@@ -6,7 +6,7 @@
 
 在本仓库的 GitHub Releases 中下载 Windows 运行包，解压到有写入权限的独立文件夹，运行 `CardFileMaker.exe`。请保留压缩包中的 DLL 和运行配置文件，不能只复制 EXE。
 
-运行需要 **.NET 8 Desktop Runtime（Windows x64）**。程序不会自动安装运行库，也不附带游戏本体、音乐、谱面或玩家数据。运行包是依赖框架的版本，不是免运行库的单文件程序。
+运行需要 **.NET 8 Desktop Runtime（Windows x64）**。
 
 程序会在所在目录创建 `save`，用于项目、五分钟自动保存和覆盖备份。升级时保留自己的 `save`，不要将它提交到仓库或上传到 Release。
 
@@ -22,7 +22,6 @@
 - LUNATIC / Re:MASTER 界面互斥；保存 Re:MASTER 时采用双 true 标记。
 - 将 opt 的 UI 资源注册进 assets.bytes，保留既有记录和依赖。
 
-目标格式以 SDDT 1.60、Unity 5.6.4f1 / serialized v17 为基础。静态检查和回读测试不能替代游戏内选曲及战斗验证；其他版本未经确认。
 
 ## 基本使用
 
@@ -45,19 +44,6 @@
 
 战斗立绘右侧 256 像素保持透明。快速模式会从高分辨率素材缩小生成对应小图。
 
-## 舞台与卡面预览
-
-Release 内置 78 张舞台静态预览，来自 SDDT 1.60 的场景模型、贴图、默认启用相机及二维背景层。预览使用简化材质，省略游戏专用遮罩、后处理和动态粒子；不等同于游戏运行截图，主要用于辨认舞台。保留场景相机的原视口比例，界面等比显示。
-
-图片以 AES-GCM 分图封装并嵌入 CardFileMaker.dll，按舞台 ID 读取，不会解密写出散图。可以点击“为当前舞台设置截图”覆盖某个舞台的显示，个人截图保存于 save/stage-previews，优先于内置图。
-
-公开源码不包含加密图片包。缺少 src/Assets/StagePreviews.dat 时仍可正常编译、制作卡片和绑定个人截图；本地具有此文件时构建会自动嵌入。内置游戏预览的来源和权利说明见 THIRD_PARTY_NOTICES.md。
-
-## 独立路径记忆
-
-游戏目录、AXXX 目录、图片导入、项目打开、项目另存、Music.xml 导入、Music.xml 保存、舞台截图导入共八类入口独立记忆目录。记录位于程序旁 `save/path-history.json`，重启后恢复；取消选择不改变记录，目录不存在则回退。项目首次打开／另存默认定位 save；打开已有项目后，其游戏目录、AXXX 和 Music 输出目录优先于全局历史。
-
-历史读取或保存失败不会阻止主要操作。这个文件包含个人路径，发布包和源码提交都必须排除 save。
 
 ## 从源码构建
 
@@ -110,13 +96,6 @@ dotnet run --project CardFileMaker.Tests.csproj -c Release
 
 文件工作流集成测试还需要设置 `CFM_TEST_GAME`，可用 `CFM_TEST_MANIFESTS` 指定以分号分隔的 assets.bytes 路径；运行时传入 `--workflow-integration` 和一个尚不存在的测试输出目录。该模式会在输出目录生成测试文件，并在测试程序旁的 save 中生成备份；不要把这些内容发布。
 
-## 发布范围
-
-源码提交：src、tests、README.md、LICENSE、THIRD_PARTY_NOTICES.md、.gitignore。
-
-运行包：上文九个运行文件，以及 README.md、LICENSE、THIRD_PARTY_NOTICES.md。请从当前源码重新构建，勿把私人模板或旧版本程序混入发布包。
-
-排除 build、dist、save、卡片项目、自动保存、备份、测试结果、游戏本体和用户提供的卡面。网页上传文件时不会自动应用本地 .gitignore，必须按上述清单选择。
 
 ## 许可证
 
