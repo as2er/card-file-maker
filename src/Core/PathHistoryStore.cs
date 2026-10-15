@@ -1,7 +1,7 @@
 using System.Text.Json;
 namespace CardFileMaker;
 
-public enum PathPurpose { GameDirectory, OptDirectory, ImageImport, ProjectOpen, ProjectSave, MusicImport, MusicSave, StagePreviewImport }
+public enum PathPurpose { GameDirectory, OptDirectory, ImageImport, ProjectOpen, ProjectSave, MusicImport, MusicSave, StagePreviewImport, ChapterImport, ChapterMusicImport, ChapterExperimentImport }
 
 /// <summary>每个选择入口独立记录成功使用的目录，历史损坏或不可写不阻止主操作。</summary>
 public sealed class PathHistoryStore

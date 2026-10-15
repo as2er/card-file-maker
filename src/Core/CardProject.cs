@@ -47,6 +47,7 @@ public sealed class CardProject
     public string OptDirectory { get; set; } = "";
     public string MusicOutputDirectory { get; set; } = "";
     public List<CardDraft> Cards { get; set; } = [];
+    public List<ChapterDraft> Chapters { get; set; } = [];
 }
 public sealed record CardExportItem(CardDraft Card, IReadOnlyDictionary<string,RgbaImage> Images);
 public sealed record BatchExportRequest(string GameDirectory,string OptDirectory,IReadOnlyList<CardExportItem> Cards);

@@ -16,7 +16,9 @@ public static class ProjectCodec
                 if(crop.Png.Length>80_000_000)throw new InvalidDataException("项目图片过大。");
                 if(crop.ImageId!=""&&seen.Add(crop.ImageId)){using var stream=zip.CreateEntry("images/"+crop.ImageId+".png",CompressionLevel.Fastest).Open();stream.Write(crop.Png);}
             }
-            using var manifest=zip.CreateEntry("project.json",CompressionLevel.Optimal).Open();JsonSerializer.Serialize(manifest,project,Options);
+            byte[] manifestBytes=JsonSerializer.SerializeToUtf8Bytes(project,Options);
+            if(manifestBytes.Length>8_000_000)throw new InvalidDataException("项目配置超过 8 MB，请将章节拆分到多个项目后保存。现有项目文件未被覆盖。");
+            using var manifest=zip.CreateEntry("project.json",CompressionLevel.Optimal).Open();manifest.Write(manifestBytes);
         }return output.ToArray();
     }
     public static CardProject Decode(byte[] bytes)
@@ -41,6 +43,7 @@ public static class ProjectCodec
         }return result;
     }
     static void Validate(CardProject p){
+        ChapterXml.ValidateStorage(p.Chapters);
         if(!Guid.TryParseExact(p.ProjectKey,"N",out _))throw new InvalidDataException("项目标识无效。");
         if(p.FormatVersion!=1||p.Cards==null||p.Cards.Count>1000)throw new InvalidDataException("不支持的项目格式或卡片数量。");
         if(p.Cards.Select(x=>x.CardId).Distinct().Count()!=p.Cards.Count||p.Cards.Select(x=>x.Key).Distinct().Count()!=p.Cards.Count)throw new InvalidDataException("项目内卡片 ID 或标识重复。");
