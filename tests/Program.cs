@@ -6,12 +6,12 @@ void Check(string name, Action test) { count++; try { test(); Console.WriteLine(
 void Assert(bool ok,string message) { if(!ok) throw new Exception(message); }
 void Throws<T>(Action a) where T:Exception { try {a();} catch(T){return;} throw new Exception("未拒绝无效输入"); }
 RgbaImage Make(int w,int h) { var b=new byte[w*h*4]; for(int y=0;y<h;y++) for(int x=0;x<w;x++){int o=(y*w+x)*4;b[o]=(byte)(x%251);b[o+1]=(byte)(y%251);b[o+2]=77;b[o+3]=(byte)(x%255);} return new(w,h,b); }
-Check("八类路径独立记忆、跨实例恢复并回退失效目录",()=>{
+Check("全部路径入口独立记忆、跨实例恢复并回退失效目录",()=>{
  var type=typeof(CardProject).Assembly.GetType("CardFileMaker.PathHistoryStore")??throw new Exception("缺少路径历史存储");
  var purpose=typeof(CardProject).Assembly.GetType("CardFileMaker.PathPurpose")!;
  string root=Path.Combine(AppContext.BaseDirectory,"path-history-tests",Guid.NewGuid().ToString("N"));Directory.CreateDirectory(root);
  object New()=>Activator.CreateInstance(type,new object?[]{root,null})!;
- var first=New();var names=Enum.GetNames(purpose);Assert(names.Length==8,"路径类别不是八类");
+ var first=New();var names=Enum.GetNames(purpose);Assert(names.Length==11,"路径类别不是十一类");
  foreach(string name in names){string dir=Path.Combine(root,name);Directory.CreateDirectory(dir);type.GetMethod("Remember")!.Invoke(first,[Enum.Parse(purpose,name),dir]);}
  var reopened=New();
  foreach(string name in names)Assert((string)type.GetMethod("Get")!.Invoke(reopened,[Enum.Parse(purpose,name),root])! ==Path.Combine(root,name),"独立历史未恢复："+name);
@@ -88,5 +88,7 @@ else {
  Console.WriteLine("SKIP Music模板测试：未提供本地模板。");
 }
 EditorWorkflowTests.Run(Check);
+ChapterTests.Run(Check);
+UnlockPatchTests.Run(Check);
 Console.WriteLine($"RESULT {count-failures}/{count} passed");
 return failures==0 ? 0 : 1;
