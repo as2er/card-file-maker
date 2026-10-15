@@ -33,6 +33,7 @@ public sealed class MainWindow:Window
  readonly Dictionary<Control,FrameworkElement> cardFieldRows=[];
  readonly TabControl tabs=new();
  readonly MusicEditorPanel music;
+ readonly ChapterEditorPanel chapters;
  readonly PathHistoryStore pathHistory;
  readonly Grid workspace=new();
  readonly string[] args;
@@ -48,7 +49,7 @@ public sealed class MainWindow:Window
    var card=cards.FirstOrDefault(x=>x.Draft.CardId==choice.Id);if(card==null)return null;
    FlushCropChanges();var state=card.States["card"].Image!=null?card.States["card"]:card.States["cardSmall"];
    return state.Image==null?null:state.Render();
-  };Content=Build();
+  };chapters=new ChapterEditorPanel(Log,pathHistory,()=>(music.CaptureXml(),music.SourcePath,music.SourceHash),()=>(game.Text,opt.Text));chapters.Changed=MarkDirty;chapters.BusyChanged=SetBusy;Content=Build();
   loading=true;
   game.Text=pathHistory.Get(PathPurpose.GameDirectory);
   opt.Text=pathHistory.Get(PathPurpose.OptDirectory);
@@ -67,6 +68,8 @@ public sealed class MainWindow:Window
     directoryTimer.Tick+=async(_,_)=>{directoryTimer.Stop();await ReloadCatalog();};
   autoSaveTimer.Tick+=async(_,_)=>await AutoSave();
   game.TextChanged+=(_,_)=>DirectoryChanged();
+  game.TextChanged+=(_,_)=>{if(!loading)chapters.InvalidateCatalog();};
+  opt.TextChanged+=(_,_)=>{if(!loading)chapters.InvalidateCatalog();};
   opt.TextChanged+=(_,_)=>{if(!loading)music.OptDirectory=opt.Text;DirectoryChanged();};
   school.AddHandler(TextBox.TextChangedEvent,new TextChangedEventHandler((_,_)=>MarkDirty()));
   school.SelectionChanged+=(_,_)=>MarkDirty();
@@ -91,6 +94,7 @@ public sealed class MainWindow:Window
   paths.Children.Add(PathField("游戏目录 · 自动读取角色、舞台、技能及 CAB",game,()=>Browse(game)));
   var op=PathField("选定 AXXX 文件夹 · Boss 卡默认输出到此文件夹",opt,()=>Browse(opt));Grid.SetColumn(op,1);op.Margin=new Thickness(12,0,0,0);paths.Children.Add(op);Grid.SetRow(paths,1);root.Children.Add(paths);
   tabs.Background=Theme.Background;tabs.BorderThickness=new Thickness(0);tabs.Items.Add(new TabItem{Header="  卡片项目  ",Content=BuildCards()});tabs.Items.Add(new TabItem{Header="  Music.xml 创建 / 编辑  ",Content=music});
+  tabs.Items.Add(new TabItem{Header="  章节与挑战  ",Content=chapters});
   workspace.Children.Add(tabs);Grid.SetRow(workspace,2);root.Children.Add(workspace);status.Text="准备就绪 · 卡片和 Music.xml 分开导出";status.Foreground=Theme.Muted;status.Margin=new Thickness(0,10,0,0);Grid.SetRow(status,3);root.Children.Add(status);return root;
  }
  UIElement BuildCards(){
@@ -340,7 +344,7 @@ public sealed class MainWindow:Window
  CardProject SnapshotProject(){
   CommitEditor();var cache=new Dictionary<BitmapSource,byte[]>();
   foreach(var card in cards){card.Draft.Crops=[];foreach(var pair in card.States){var s=pair.Value;if(s.Image==null)continue;if(!cache.TryGetValue(s.Image,out var png)){png=ImageFiles.Png(s.Image);cache[s.Image]=png;}card.Draft.Crops[pair.Key]=new(){Png=png,SourceName=s.SourceName,Transform=s.Transform};}}
-  return new(){ProjectKey=projectKey,MusicXml=music.CaptureXml(),MusicRawDraft=music.IsRawDraft,MusicSourcePath=music.SourcePath,MusicSourceHash=music.SourceHash,GameDirectory=game.Text,OptDirectory=opt.Text,MusicOutputDirectory=music.OutputDirectory,Cards=cards.Select(x=>x.Draft.Snapshot()).ToList()};
+  return new(){ProjectKey=projectKey,MusicXml=music.CaptureXml(),MusicRawDraft=music.IsRawDraft,MusicSourcePath=music.SourcePath,MusicSourceHash=music.SourceHash,GameDirectory=game.Text,OptDirectory=opt.Text,MusicOutputDirectory=music.OutputDirectory,Cards=cards.Select(x=>x.Draft.Snapshot()).ToList(),Chapters=chapters.Snapshot()};
  }
  bool SaveProject(bool saveAs){
   if(busy||autoSaving)return false;var project=SnapshotProject();string? path=projectPath;
@@ -351,10 +355,10 @@ public sealed class MainWindow:Window
   AutoSaveStore.WriteProjectFile(path,bytes,before,staging,backup);pathHistory.Remember(PathPurpose.ProjectSave,Path.GetDirectoryName(path)!);projectPath=path;music.MarkSaved();dirty=false;Title="Card File Maker · "+Path.GetFileName(path);Log("卡片项目已保存："+path);return true;
  }
  bool CanReplace()=>!(dirty||music.HasUnsavedChanges)||MessageBox.Show(this,"卡片项目尚未保存。是否放弃更改并继续？","未保存的项目",MessageBoxButton.YesNo,MessageBoxImage.Warning)==MessageBoxResult.Yes;
- void NewProject(){if(busy||autoSaving||!CanReplace())return;pendingCrop=null;timer.Stop();projectKey=Guid.NewGuid().ToString("N");music.NewDocument();loading=true;cards.Clear();library.Items.Clear();foreach(var card in installedCards)library.Items.Add(card.Item);current=null;projectPath=null;loading=false;LoadEditor();NewCard();dirty=false;Title="Card File Maker · 新项目";}
+ void NewProject(){if(busy||autoSaving||!CanReplace())return;pendingCrop=null;timer.Stop();projectKey=Guid.NewGuid().ToString("N");music.NewDocument();chapters.Restore([]);loading=true;cards.Clear();library.Items.Clear();foreach(var card in installedCards)library.Items.Add(card.Item);current=null;projectPath=null;loading=false;LoadEditor();NewCard();dirty=false;Title="Card File Maker · 新项目";}
  void OpenProject(){
   if(busy||autoSaving||!CanReplace())return;var d=new OpenFileDialog{Title="打开卡片项目",Filter="卡片项目|*.cfmproj",InitialDirectory=pathHistory.Get(PathPurpose.ProjectOpen,SaveDirectory)};if(d.ShowDialog(this)!=true)return;
-  var p=ProjectCodec.Decode(File.ReadAllBytes(d.FileName));var loaded=p.Cards.Select(x=>new EditableCard(x)).ToList();
+  var p=ProjectCodec.Decode(File.ReadAllBytes(d.FileName));var loaded=p.Cards.Select(x=>new EditableCard(x)).ToList();chapters.Restore(p.Chapters);chapters.InvalidateCatalog();
   loading=true;
   try{pendingCrop=null;timer.Stop();cards.Clear();installedCards.Clear();library.Items.Clear();current=null;game.Text=p.GameDirectory;opt.Text=p.OptDirectory;music.OutputDirectory=p.MusicOutputDirectory;
    foreach(var c in loaded){cards.Add(c);library.Items.Add(c.Item);}projectPath=d.FileName;projectKey=p.ProjectKey;
